@@ -15,17 +15,24 @@ export default class App extends React.Component {
       "https://1.bp.blogspot.com/-keamd2P-Hig/XVKf52Kt7uI/AAAAAAABUFk/dEeWB6cyq7MsM0_fgxiR_6-C730xrGP0wCLcBGAs/s400/food_ebi_fry.png",
       "https://4.bp.blogspot.com/-6Mq74jWtOxM/WKFjCFW3FYI/AAAAAAABBso/1VoQZiuoax0ja_sdNdOStH5KYYUcG4BvQCLcB/s400/golden_egg.png"
     ];
-
-    this.state = {
-      items: items,
-      sources: sources,
-    };
+    this.state={
+    boxes = []
+  };
+    for (var i = 0; i < 5; i++){
+      const newBox = {
+        name: items[i],
+        source: sources[i],
+        liked: false
+      }
+      const boxes = [... this.state.boxes, newBox];
+    }
+    this.setState({ boxes });
   }
 
 // I want to make it so if item is liked, print a heart icon
-  itembox = (items, sources) => {
+  itembox = (box) => {
     return <div>
-      <Thingy name={items} source={sources}></Thingy>
+      <Thingy name={box.name} source={box.source}></Thingy>
     </div>
   }
 
@@ -33,7 +40,7 @@ export default class App extends React.Component {
     return (
       <div>
         <h1>Do you like this?</h1>
-        <div className="App">{this.state.items.map(this.itembox)}</div>
+        <div className="App">{this.state.boxes.map(this.itembox)}</div>
       </div>
     );
   }
